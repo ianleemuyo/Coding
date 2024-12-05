@@ -1,0 +1,134 @@
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background: linear-gradient(135deg, #e6ccff, #d8b2f8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.container {
+  text-align: center;
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  border: 2px solid #c7a4e8;
+  position: relative;
+  width: 400px;
+  height: 300px;
+  z-index: 2;  /* Ensures the container and buttons stay above the clock */
+}
+
+.clock {
+  font-size: 48px;
+  color: #333;
+  font-family: 'Courier New', Courier, monospace;
+  position: fixed;  /* Fixed to the top */
+  top: 20px;  /* Distance from the top */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;  /* Ensure the clock is behind the container */
+}
+
+.header {
+  font-size: 36px;
+  color: #9932cc;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  position: relative;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  z-index: 10; /* Ensure buttons are above text */
+}
+
+button:focus {
+  outline: none;
+}
+
+button.yes {
+  background: linear-gradient(135deg, #b39ddb, #9c77d2);
+  color: white;
+  box-shadow: 0 4px 6px rgba(173, 137, 255, 0.4);
+}
+
+button.yes:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 12px rgba(173, 137, 255, 0.6);
+}
+
+button.no {
+  background: linear-gradient(135deg, #d1b3ff, #c39bf5);
+  color: white;
+  box-shadow: 0 4px 6px rgba(210, 137, 255, 0.4);
+  position: relative;
+}
+
+button.no:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 12px rgba(210, 137, 255, 0.6);
+}
+
+.hidden {
+  display: none;
+}
+
+#celebration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.images-container {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.images-container img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.message {
+  font-size: 24px;
+  color: #9932cc;
+  font-weight: bold;
+  text-align: center;
+}
+
+#messages {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  color: #7a42f4;
+  font-weight: bold;
+  text-align: center;
+  z-index: 2;  /* Ensure the message is above the clock */
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yes or No Celebration</title>
+  <link rel="stylesheet" href="siya.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Digital Clock -->
+    <div id="clock" class="clock"></div>
+
+    <div class="header">DO YOU LIKE ME?</div>
+    
+    <div class="button-container">
+      <button class="yes" onclick="handleYes()">Yes</button>
+      <button class="no" onclick="moveNoButton()">No</button>
+    </div>
+    
+    <div id="celebration" class="hidden">
+      <div class="images-container"></div>
+      <div class="message">🎉 Thank you for liking me! 🎉</div>
+    </div>
+    
+    <div id="messages" class="hidden"></div>
+  </div>
+
+  <!-- Custom sound that plays on "No" click -->
+  <audio id="no-sound">
+    <source src="no-sound.mp3" type="audio/mpeg"> <!-- Replace with your own sound file -->
+    Your browser does not support the audio element.
+  </audio>
+
+  <audio id="celebration-music" loop>
+    <source src="" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    let noClickCount = 0;
+    let clockInterval;
+    let timeStopped = false;
+
+    // Function to update the digital clock
+    function updateClock() {
+      const clock = document.getElementById("clock");
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      clock.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Start the clock when the page loads
+    function startClock() {
+      clockInterval = setInterval(updateClock, 1000); // Updates every second
+    }
+
+    function handleYes() {
+      // Stop the clock
+      clearInterval(clockInterval);
+      timeStopped = true;
+
+      document.querySelector('.button-container').classList.add('hidden');
+      const celebration = document.getElementById('celebration');
+      celebration.classList.remove('hidden');
+      const music = document.getElementById('celebration-music');
+      music.play();
+
+      const images = ['image1.jpg', 'image2.jpg', 'image3.jpg']; // Replace with your image paths
+      const imagesContainer = document.querySelector('.images-container');
+
+      images.forEach((imgSrc) => {
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        img.alt = 'Celebration image';
+        imagesContainer.appendChild(img);
+      });
+    }
+
+    function moveNoButton() {
+      const noButton = document.querySelector('.no');
+      const container = document.querySelector('.container');
+      const messages = document.getElementById('messages');
+
+      // Play the custom sound when the "No" button is clicked
+      const noSound = document.getElementById('no-sound');
+      noSound.play();
+
+      // Increment click count
+      noClickCount++;
+
+      // Display messages based on click count
+      if (noClickCount === 5) {
+        messages.innerText = "Do you really not like me?";
+        messages.classList.remove('hidden');
+      } else if (noClickCount === 10) {
+        messages.innerText = "That much?";
+      } else if (noClickCount === 20) {
+        messages.innerText = "Try again, maybe you will.";
+      } else if (noClickCount === 21) {
+        location.reload(); // Reload the page
+      }
+
+      // Get the container dimensions
+      const containerRect = container.getBoundingClientRect();
+
+      // Generate random position within the container
+      const randomX = Math.random() * (containerRect.width - noButton.offsetWidth);
+      const randomY = Math.random() * (containerRect.height - noButton.offsetHeight);
+
+      // Move the button to the random position
+      noButton.style.position = 'absolute';
+      noButton.style.left = `${randomX}px`;
+      noButton.style.top = `${randomY}px`;
+    }
+
+    // Start the clock when the page loads
+    window.onload = function() {
+      startClock();
+    };
+  </script>
+</body>
+</html>
